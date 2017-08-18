@@ -26,14 +26,25 @@
 <h2>Would you like to mark this job complete?</h2>
 <hr />
 
-<form action="Complete" class="complete-job">
-    @Html.HiddenFor(model => model.JobId)
-    @Html.HiddenFor(model => model.Title)
-    @Html.HiddenFor(model => model.Description)
+@if (!Model.Completed && Model.Pending)
+{
+    <form action="Complete" class="complete-job">
+        @Html.HiddenFor(model => model.JobId)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.Description)
 
-    <h4>@Model.Title</h4>
-    <input type="submit" value="Mark This Job Complete" />
-    <div class="success"></div>
-</form>
+        <h4>@Model.Title</h4>
+        <input type="submit" value="Mark This Job Complete" />
+        <div class="success"></div>
+    </form>
+}
+else if (!Model.Pending && !Model.Completed)
+{
+    <p>You haven't indicated that you're actively working on this job. Completing it seems... premature.</p>
+}
+else if (Model.Completed)
+{
+    <p>This job is already complete.</p>
+}
 
 <p>@Html.ActionLink("Back to list", "Index", "Workers")</p>
