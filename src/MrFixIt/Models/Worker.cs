@@ -15,7 +15,7 @@ namespace MrFixIt.Models
         public int WorkerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool Avaliable { get; set; }
+        public bool Available { get; set; }
         public string UserName { get; set; }
         //this comes from Identity.User
         public virtual ICollection<Job> Jobs { get; set; }
@@ -23,8 +23,12 @@ namespace MrFixIt.Models
         public Worker()
         {
             //This sets all workers to be available for tasks by default.
-            Avaliable = true;
+            Available = true;
         }
 
+        public List<Job> GetJobs()
+        {
+            return new MrFixItContext().Jobs.Where(job => job.Worker.WorkerId == WorkerId).ToList();
+        }
     }
 }
