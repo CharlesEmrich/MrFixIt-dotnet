@@ -44,9 +44,13 @@ namespace MrFixIt.Controllers
         {
             Job job = db.Jobs.FirstOrDefault(i => i.JobId == JobId);
             Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
-            worker.Available = false;
+            //The next two lines modify the .worker attribute of the job.
             job.Worker = worker;
             db.Entry(job).State = EntityState.Modified;
+            //These lines modify the worker to make them unavailable.
+            worker.Available = false;
+            db.Entry(worker).State = EntityState.Modified;
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

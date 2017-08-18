@@ -26,9 +26,5 @@ namespace MrFixIt.Models
             Available = true;
         }
 
-        public List<Job> GetJobs()
-        {
-            return new MrFixItContext().Jobs.Where(job => job.Worker.WorkerId == WorkerId).ToList();
-        }
     }
 }
