@@ -25,12 +25,12 @@
             {
                 <li>Status: Unclaimed</li>
             }
-            @if (Job.Worker)
+            @if (Job.Worker != null)
             {
                 <li>Status: Claimed by @Job.Worker.FirstName @Job.Worker.LastName</li>
             }
         </ul>
-        @if (Job.Worker == null)
+        @if (Job.Worker == null && Job.FindWorker(User.Identity.Name).Available)
         {
             //TODO: Make the Actionlink's appearance conditional on .Available.
         <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
