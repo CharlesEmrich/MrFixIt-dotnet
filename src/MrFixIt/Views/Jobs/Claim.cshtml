@@ -5,15 +5,33 @@
 }
 @model MrFixIt.Models.Job
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.new-destination').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("Claim")',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function() {console.log('ping')}
+                }
+            });
+        });
+    }
+</script>
+
 <h2>Would you like to do this job?</h2>
 <hr />
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Claim", "Jobs", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, true, new { @class = "claim-job" }))
 {
     @Html.HiddenFor(model => model.JobId)
     @Html.HiddenFor(model => model.Title)
     @Html.HiddenFor(model => model.Description)
 
     <h4>@Model.Title</h4>
-    <input type="submit" value="Claim This Job" />
+    <input class="claim-job" type="submit" value="Claim This Job" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>

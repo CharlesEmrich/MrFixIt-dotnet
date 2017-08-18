@@ -32,7 +32,7 @@ namespace MrFixIt.Controllers
             return View();
         }
 
-
+        //Creates a new worker based on the currently logged in user.
         [HttpPost]
         public IActionResult Create(Worker worker)
         {

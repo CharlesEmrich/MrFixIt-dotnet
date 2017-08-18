@@ -22,6 +22,7 @@ namespace MrFixIt.Models
 
         public Worker()
         {
+            //This sets all workers to be available for tasks by default.
             Avaliable = true;
         }
 
