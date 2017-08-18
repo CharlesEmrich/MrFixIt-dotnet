@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model MrFixIt.Models.Job
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.complete-job').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: '@Url.Action("Activate")',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                //I'm receiving the View from the Action back as an error? But I am successfully claiming the job!
+                error: function (error) {
+                    console.log(error);
+                    $(".success").html("You have successfully completed this job!");
+                }
+            });
+        });
+    });
+</script>
+
+<h2>Would you like to do this job?</h2>
+<hr />
+
+<form action="Complete" class="complete-job">
+    @Html.HiddenFor(model => model.JobId)
+    @Html.HiddenFor(model => model.Title)
+    @Html.HiddenFor(model => model.Description)
+
+    <h4>@Model.Title</h4>
+    <input type="submit" value="Complete This Job" />
+    <div class="success"></div>
+</form>
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
