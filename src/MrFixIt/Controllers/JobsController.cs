@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
+// Handles Routes related to Jobs, definitely the largest chunk of data being moved around by the app.
 namespace MrFixIt.Controllers
 {
     public class JobsController : Controller
@@ -25,6 +26,7 @@ namespace MrFixIt.Controllers
             return View();
         }
 
+        //Boy, I sure hope converting all of these to AJAX wasn't part of the project. This one is still using pure MVC/Entity Framework stuff.
         [HttpPost]
         public IActionResult Create(Job job)
         {

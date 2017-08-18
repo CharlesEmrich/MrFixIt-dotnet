@@ -7,6 +7,7 @@ using MrFixIt.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
+//Handles base routes. At the moment it's pretty empty. This app could make better use of its front page.
 namespace MrFixIt.Controllers
 {
     public class HomeController : Controller
