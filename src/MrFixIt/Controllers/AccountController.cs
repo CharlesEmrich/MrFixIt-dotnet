@@ -28,16 +28,10 @@ namespace MrFixIt.Controllers
             _db = db;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
         public IActionResult Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                //This code is causing an unhandled exception sometimes?
                 var thisWorker = db.Workers.FirstOrDefault(item => item.UserName == User.Identity.Name);
                 return View(thisWorker);
             }

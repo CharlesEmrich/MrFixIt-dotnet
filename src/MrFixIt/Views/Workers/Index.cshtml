@@ -12,9 +12,15 @@
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
-            <h5>@Job.Title @if (</h5>
-            <p>@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</p>
-            <p>@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</p>
+            <h5>@Job.Title</h5>
+            @if (!Job.Completed && !Job.Pending)
+            {
+                <p>@Html.ActionLink("Pending-ify", "Pending", "Jobs", new {id = Job.JobId })</p>
+            }
+            @if (Job.Pending)
+            {
+                <p>@Html.ActionLink("Complete-erate", "Complete", "Jobs", new {id = Job.JobId })</p>
+            }
 
         }
         @if (Model.Available)

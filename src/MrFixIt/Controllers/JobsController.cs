@@ -54,5 +54,47 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Pending(int id)
+        {
+            var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
+            return View(thisItem);
+        }
+
+        [HttpPost]
+        public IActionResult Pending(int JobId, string Title, string Description)
+        {
+            Job job = db.Jobs.FirstOrDefault(i => i.JobId == JobId);
+            job.Pending = true;
+            db.Entry(job).State = EntityState.Modified;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Complete(int id)
+        {
+            var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
+            return View(thisItem);
+        }
+
+        [HttpPost]
+        public IActionResult Complete(int JobId, string Title, string Description)
+        {
+            Job job = db.Jobs.FirstOrDefault(i => i.JobId == JobId);
+            //Completed tasks should not be pending.
+            job.Pending = false;
+            //They should, however, be copmlete.
+            job.Completed = true;
+            db.Entry(job).State = EntityState.Modified;
+
+            //We also need to make the worker available again.
+            Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            worker.Available = true;
+            db.Entry(worker).State = EntityState.Modified;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

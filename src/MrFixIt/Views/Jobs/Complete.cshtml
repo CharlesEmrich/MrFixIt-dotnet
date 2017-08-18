@@ -9,21 +9,21 @@
         $('.complete-job').submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: '@Url.Action("Activate")',
+                url: '@Url.Action("Complete")',
                 type: 'POST',
                 dataType: 'json',
                 data: $(this).serialize(),
                 //I'm receiving the View from the Action back as an error? But I am successfully claiming the job!
                 error: function (error) {
                     console.log(error);
-                    $(".success").html("You have successfully completed this job!");
+                    $(".success").html("You have successfully marked this job complete!");
                 }
             });
         });
     });
 </script>
 
-<h2>Would you like to do this job?</h2>
+<h2>Would you like to mark this job complete?</h2>
 <hr />
 
 <form action="Complete" class="complete-job">
@@ -32,8 +32,8 @@
     @Html.HiddenFor(model => model.Description)
 
     <h4>@Model.Title</h4>
-    <input type="submit" value="Complete This Job" />
+    <input type="submit" value="Mark This Job Complete" />
     <div class="success"></div>
 </form>
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Back to list", "Index", "Workers")</p>
