@@ -16,6 +16,7 @@
         </ul>
         @if (Job.Worker == null)
         {
+            //TODO: Make the Actionlink's appearance conditional on .Available.
         <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
         }
         else

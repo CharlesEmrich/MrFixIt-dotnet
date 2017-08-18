@@ -7,13 +7,14 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    //Line 19 was bugged due to a typo. Also, how many jobs should a user be able to claim?
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
-            <h5>@Job.Title</h5>
+            <h5>@Job.Title @if (</h5>
+            <p>@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</p>
+            <p>@Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</p>
 
         }
         @if (Model.Available)
