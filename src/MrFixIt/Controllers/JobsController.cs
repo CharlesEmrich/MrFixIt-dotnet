@@ -43,10 +43,11 @@ namespace MrFixIt.Controllers
         public IActionResult Claim(int JobId, string Title, string Description)
         {
             Job job = db.Jobs.FirstOrDefault(i => i.JobId == JobId);
-            job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            Worker worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
+            worker.Available = false;
+            job.Worker = worker;
             db.Entry(job).State = EntityState.Modified;
             db.SaveChanges();
-            //Render worker unavailable, and make conditional on worker availability?
             return RedirectToAction("Index");
         }
     }
