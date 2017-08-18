@@ -7,7 +7,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-
+    //Line 19 was bugged due to a typo. Also, how many jobs should a user be able to claim?
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
@@ -16,7 +16,7 @@
             <h5>@Job.Title</h5>
 
         }
-        @if (Model.Avaliable)
+        @if (Model.Available)
         {
             <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>
         }
