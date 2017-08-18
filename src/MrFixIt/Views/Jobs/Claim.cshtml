@@ -27,14 +27,20 @@
 <h2>Would you like to do this job?</h2>
 <hr />
 
-<form action="Claim" class="claim-job">
-    @Html.HiddenFor(model => model.JobId)
-    @Html.HiddenFor(model => model.Title)
-    @Html.HiddenFor(model => model.Description)
+@if (Model.FindWorker(User.Identity.Name).Available)
+{
+    <form action="Claim" class="claim-job">
+        @Html.HiddenFor(model => model.JobId)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.Description)
 
-    <h4>@Model.Title</h4>
-    <input type="submit" value="Claim This Job" />
-    <div class="success"></div>
-</form>
+        <h4>@Model.Title</h4>
+        <input type="submit" value="Claim This Job" />
+        <div class="success"></div>
+    </form>
+} else
+{
+    <p>You don't appear to be available to claim a new job right now.</p>
+}
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
