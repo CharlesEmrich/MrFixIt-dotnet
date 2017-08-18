@@ -7,31 +7,31 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.new-destination').submit(function (event) {
+        $('.claim-job').submit(function (event) {
+            console.log("Pong");
             event.preventDefault();
             $.ajax({
                 url: '@Url.Action("Claim")',
                 type: 'POST',
                 dataType: 'json',
                 data: $(this).serialize(),
-                success: function() {console.log('ping')}
-                }
+                success: function (result) { console.log(result) },
+                error: function (error) { console.log(error) }
             });
         });
-    }
+    });
 </script>
 
 <h2>Would you like to do this job?</h2>
 <hr />
 
-@using (Html.BeginForm("Claim", "Jobs", new { ReturnUrl = ViewBag.ReturnUrl },
-            FormMethod.Post, true, new { @class = "claim-job" }))
-{
+<form action="Claim" class="claim-job">
     @Html.HiddenFor(model => model.JobId)
     @Html.HiddenFor(model => model.Title)
     @Html.HiddenFor(model => model.Description)
 
     <h4>@Model.Title</h4>
-    <input class="claim-job" type="submit" value="Claim This Job" />
-}
+    <input type="submit" value="Claim This Job" />
+</form>
+
 <p>@Html.ActionLink("Back to list", "Index")</p>
