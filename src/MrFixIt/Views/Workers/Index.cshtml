@@ -12,7 +12,8 @@
         <h3>Your Current Jobs:</h3>
         @foreach (var Job in Model.Jobs)
         {
-            <h5>@Job.Title</h5>
+            <h5>@Job.Title @if (Job.Pending) { <span>| Pending</span> } @if (Job.Completed)
+            { <span>| Completed</span> }</h5>
             @if (!Job.Completed && !Job.Pending)
             {
                 <p>@Html.ActionLink("Pending-ify", "Pending", "Jobs", new {id = Job.JobId })</p>

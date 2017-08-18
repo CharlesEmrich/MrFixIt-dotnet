@@ -13,6 +13,14 @@
         <li>@Job.Title</li>
         <ul>
             <li>@Job.Description</li>
+            @if (Job.Pending)
+            {
+                <li>Currently: Pending</li>
+            }
+            @if (Job.Completed)
+            {
+                <li>Currently: Completed</li>
+            }
         </ul>
         @if (Job.Worker == null)
         {
