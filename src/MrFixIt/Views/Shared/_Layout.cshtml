@@ -29,9 +29,12 @@
                     <li>
                         @Html.ActionLink("About", "Index", "About")
                     </li>
+                    @if (User.Identity.Name != null)
+                    {
                     <li>
                         @Html.ActionLink("Hire Us", "Index", "Jobs")
                     </li>
+                    }
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>

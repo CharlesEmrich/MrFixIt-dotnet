@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MrFixIt.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -54,7 +55,7 @@ namespace MrFixIt.Controllers
             db.Entry(worker).State = EntityState.Modified;
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(job);
         }
 
         public IActionResult Pending(int id)
@@ -71,7 +72,7 @@ namespace MrFixIt.Controllers
             db.Entry(job).State = EntityState.Modified;
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(job);
         }
 
         public IActionResult Complete(int id)
@@ -86,7 +87,7 @@ namespace MrFixIt.Controllers
             Job job = db.Jobs.FirstOrDefault(i => i.JobId == JobId);
             //Completed tasks should not be pending.
             job.Pending = false;
-            //They should, however, be copmlete.
+            //They should, however, be complete.
             job.Completed = true;
             db.Entry(job).State = EntityState.Modified;
 
@@ -96,7 +97,7 @@ namespace MrFixIt.Controllers
             db.Entry(worker).State = EntityState.Modified;
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(job);
         }
     }
 }

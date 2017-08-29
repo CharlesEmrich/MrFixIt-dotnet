@@ -13,10 +13,9 @@
                 type: 'POST',
                 dataType: 'json',
                 data: $(this).serialize(),
-                //I'm receiving the View from the Action back as an error? But I am successfully claiming the job!
-                error: function (error) {
-                    console.log(error);
-                    $(".success").html("You have successfully marked this job pending!");
+                success: function (result) {
+                    console.log(result);
+                    $(".success").html("You have successfully pending-ed this job!");
                 }
             });
         });
